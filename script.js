@@ -4,7 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const townInput = document.getElementById("townInput");
     const searchBtn = document.getElementById("searchBtn");
     const carousel = document.getElementById("carousel");
-
+    
+    let angle = 0;
+    let currentIndex = 0;
 
     //API 
     const API_KEY = "the api key"; // https://home.openweathermap.org/api_keys
@@ -62,8 +64,20 @@ document.addEventListener("DOMContentLoaded", function () {
    // Load default town
    fetchWeather("Witham");
 
-   // Placeholder
+   
    function updateCarousel() {
+    const cards = carousel.querySelectorAll(".card");
+    const numberOfCards = cards.length;
+    const angleIncrement = 360 / numberOfCards;
+
+    cards.forEach((card, i) => {
+        const angleDeg = i * angleIncrement;
+        card.style.transform = `rotateY(${angleDeg}deg) translateZ(300px)`;
+    });
+
+    // Rotate the carousel itself
+    carousel.style.transform = `rotateY(${-currentIndex * angleIncrement}deg)`;
+}
     
 
 });
