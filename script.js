@@ -4,7 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const townInput = document.getElementById("townInput");
     const searchBtn = document.getElementById("searchBtn");
     const carousel = document.getElementById("carousel");
-    
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+
     let angle = 0;
     let currentIndex = 0;
 
@@ -64,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
    // Load default town
    fetchWeather("Witham");
 
-   
+
    function updateCarousel() {
     const cards = carousel.querySelectorAll(".card");
     const numberOfCards = cards.length;
@@ -78,6 +81,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // Rotate the carousel itself
     carousel.style.transform = `rotateY(${-currentIndex * angleIncrement}deg)`;
 }
+   
+  // previous and next button
+
+  prevBtn.addEventListener("click", () => {
+    const cards = carousel.querySelectorAll(".card");
+    currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+    updateCarousel();
+});
+
+nextBtn.addEventListener("click", () => {
+    const cards = carousel.querySelectorAll(".card");
+    currentIndex = (currentIndex + 1) % cards.length;
+    updateCarousel();
+});
     
 
 });
