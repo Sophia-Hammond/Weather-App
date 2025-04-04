@@ -99,7 +99,7 @@ body {
 }
 
 /* Navigation Buttons */
-#prev, #next {
+#prevBtn, #nextBtn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -109,8 +109,8 @@ body {
     cursor: pointer;
 }
 
-#prev { left: 10px; }
-#next{ right: 10px; }
+#prevBtn { left: 10px; }
+#nextBtn{ right: 10px; }
 
 /* Animation for auto-rotation */
 @keyframes rotate {

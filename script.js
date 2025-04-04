@@ -7,12 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
 
-
-    let angle = 0;
     let currentIndex = 0;
 
     //API 
-    const API_KEY = "the api key"; // https://home.openweathermap.org/api_keys
+    const API_KEY = "7b4a13ac9e2a79595d77b0b3f3199067"; // https://home.openweathermap.org/api_keys
     const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
     
     
@@ -21,13 +19,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const nightVideo = "videos/nightSky.mp4"
    
 
-    // gets the current hour
-    const currentHour = new Date().getHours();
-
     // if hour is between 7am & 7pm (dayVideo) otherwise (nightVideo)
-   videoSource.src = (currentHour >= 7 && currentHour < 19) ? dayVideo : nightVideo;
-   videoElement.load();
+    const currentHour = new Date().getHours(); //gets current hour
+    videoSource.src = (currentHour >= 7 && currentHour < 19) ? dayVideo : nightVideo;
+    videoElement.load();
+   
+   // towns on carousel
+   const ukTowns = [
+         "London", "Birmingham", "Manchester", "Leeds", "Glasgow",
+        "Sheffield", "Bradford", "Liverpool", "Edinburgh", "Bristol",
+        "Cardiff", "Leicester", "Nottingham", "Hull", "Newcastle",
+        "Stoke-on-Trent", "Southampton", "Derby", "Portsmouth", "Brighton",
+        "Plymouth", "Northampton", "Reading", "Luton", "Wolverhampton",
+        "Bolton", "Aberdeen", "Norwich", "Swansea", "Oxford"
+   ];
 
+   ukTowns.forEach(town => fetchWeather(town));
     // Fetch weather data
 
     async function fetchWeather(town) {
