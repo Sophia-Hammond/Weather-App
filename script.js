@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const videoElement = document.getElementById("background-video");
     const videoSource = document.getElementById("video-source");
-    const weatherContainer = document.getElementById("weather.container");
+    const weatherContainer = document.getElementById("weather-container");
      
     //API 
-    const API_KEY = "";
+    const API_KEY = "the api key"; // https://home.openweathermap.org/api_keys
     const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
     
     
@@ -40,5 +40,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // display fetched weather data
-    function displayWeather
-})
+    function displayWeather(data) {
+        const { name, main, weather } = data;
+        weatherContainer.innerHTML = `
+            <h2>${name}</h2>
+            <p>Temperature: ${main.temp}°C</p>
+            <p>condition: ${weather[0].description}</p>;
+    `}
+
+    // search for town weather 
+    document.getElementById("search-btn").addEventListener("click", function () {
+        const town = document.getElementById("town-input").value 
+        if (town) fetchWeather(city);
+
+    });
+
+    // get weather for a default town
+    fetchWeather("Witham");
+});
