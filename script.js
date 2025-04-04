@@ -14,18 +14,14 @@ document.addEventListener("DOMContentLoaded", function () {
     //video source
     const dayVideo = "videos/daySky.mp4";
     const nightVideo = "videos/nightSky.mp4"
+   
 
     // gets the current hour
     const currentHour = new Date().getHours();
 
     // if hour is between 7am & 7pm (dayVideo) otherwise (nightVideo)
-    if (currentHour >= 7 && currentHour < 19) {
-        videoSource.src = dayVideo;
-    } else {
-        videoSource.src = nightVideo;
-    }
-
-    videoElement.load()
+   videoSource.src = (currentHour >= 7 && currentHour < 19) ? dayVideo : nightVideo;
+   videoElement.load();
 
     // Fetch weather data
 
@@ -38,26 +34,36 @@ document.addEventListener("DOMContentLoaded", function () {
             displayWeather(data);
         } catch (error) {
             console.error("Error fetching weather:", error);
-            weatherContainer.innerHTML = `<p>Error: ${error.message}</p>`;
+            alert(`Error: ${error.message}`);
          }
     }
 
     // display fetched weather data
     function displayWeather(data) {
         const { name, main, weather } = data;
-        weatherContainer.innerHTML = `
+
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
             <h2>${name}</h2>
-            <p>Temperature: ${main.temp}°C</p>
-            <p>condition: ${weather[0].description}</p>;
-    `}
+            <p>${main.temp}°C</p>
+            <p>${weather[0].description}</p>`;
+            
+            carousel.appendChild(card);
 
-    // search for town weather 
-    document.getElementById("search-btn").addEventListener("click", function () {
-        const town = document.getElementById("town-input").value 
-        if (townInput.value) fetchWeather(townInput.value);
+            updateCarousel(); 
+    }
 
-    });
+   // Search button click
+   searchBtn.addEventListener("click", function () {
+    if (townInput.value) fetchWeather(townInput.value);
+});
 
-    // get weather for a default town
-    fetchWeather("Witham");
+   // Load default town
+   fetchWeather("Witham");
+
+   // Placeholder
+   function updateCarousel() {
+    
+
 });
