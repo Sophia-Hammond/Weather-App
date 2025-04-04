@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const videoElement = document.getElementById("background-video");
     const videoSource = document.getElementById("video-source");
-    const weatherContainer = document.getElementById("weather-container");
-     
+    const townInput = document.getElementById("townInput");
+    const searchBtn = document.getElementById("searchBtn");
+    const carousel = document.getElementById("carousel");
+
+
     //API 
     const API_KEY = "the api key"; // https://home.openweathermap.org/api_keys
     const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
@@ -51,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // search for town weather 
     document.getElementById("search-btn").addEventListener("click", function () {
         const town = document.getElementById("town-input").value 
-        if (town) fetchWeather(city);
+        if (townInput.value) fetchWeather(townInput.value);
 
     });
 
