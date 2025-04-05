@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function displayWeather(data) {
+        console.log("Displaying card for:", data.name);
         const { name, main, weather } = data;
 
         const card = document.createElement("div");

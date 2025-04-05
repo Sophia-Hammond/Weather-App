@@ -16,6 +16,82 @@ body {
     overflow: hidden;
 }
 
+
+
+/* Search Container */
+.search-container {
+    margin-bottom: 20px;
+    z-index: 3;
+}
+
+#townInput {
+    padding: 10px;
+    width: 200px;
+    border: none;
+    border-radius: 10px;
+}
+
+#searchBtn {
+    padding: 10px;
+    cursor: pointer;
+    background: #004cff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Carousel Container */
+.carousel-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    perspective: 1000px; /*  3D effect */
+    z-index: 2;
+}
+
+/* 3D Rotating Carousel */
+.carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: rotate 20s infinite linear;
+}
+
+/* Weather Cards */
+.card {
+    width: 200px;
+    height: 120px;
+    position: absolute;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.5s;
+    z-index: 3;
+}
+
+/* Navigation Buttons */
+#prevBtn, #nextBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#prevBtn { left: 10px; }
+#nextBtn{ right: 10px; }
+
+/* Animation for auto-rotation */
+@keyframes rotate {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
 /* video background */
 
 #video-container {
@@ -45,75 +121,4 @@ body {
     color: white;
     font-size: 1.5rem;
     padding-top: 20vh;
-}
-
-/* Search Container */
-.search-container {
-    margin-bottom: 20px;
-}
-
-#townInput {
-    padding: 10px;
-    width: 200px;
-    border: none;
-    border-radius: 10px;
-}
-
-#searchBtn {
-    padding: 10px;
-    cursor: pointer;
-    background: #004cff;
-    border: none;
-    color: white;
-    border-radius: 5px;
-}
-
-/* Carousel Container */
-.carousel-container {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    perspective: 1000px; /*  3D effect */
-}
-
-/* 3D Rotating Carousel */
-.carousel {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    transform-style: preserve-3d;
-    animation: rotate 20s infinite linear;
-}
-
-/* Weather Cards */
-.card {
-    width: 200px;
-    height: 120px;
-    position: absolute;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    padding: 10px;
-    transition: transform 0.5s;
-}
-
-/* Navigation Buttons */
-#prevBtn, #nextBtn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.5);
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-}
-
-#prevBtn { left: 10px; }
-#nextBtn{ right: 10px; }
-
-/* Animation for auto-rotation */
-@keyframes rotate {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(360deg); }
 }
