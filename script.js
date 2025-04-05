@@ -7,28 +7,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
 
-
-    let angle = 0;
     let currentIndex = 0;
 
-    //API 
-    const API_KEY = "the api key"; // https://home.openweathermap.org/api_keys
+    const API_KEY = "7b4a13ac9e2a79595d77b0b3f3199067";
     const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
-    
-    
-    //video source
+
     const dayVideo = "videos/daySky.mp4";
-    const nightVideo = "videos/nightSky.mp4"
-   
-
-    // gets the current hour
+    const nightVideo = "videos/nightSky.mp4";
     const currentHour = new Date().getHours();
+    videoSource.src = (currentHour >= 7 && currentHour < 19) ? dayVideo : nightVideo;
+    videoElement.load();
 
-    // if hour is between 7am & 7pm (dayVideo) otherwise (nightVideo)
-   videoSource.src = (currentHour >= 7 && currentHour < 19) ? dayVideo : nightVideo;
-   videoElement.load();
+    const ukTowns = [
+        "London", "Colchester", "Chelmsford", "Edinburgh", "Bristol",
+        "Cardiff", "Leicester", "Nottingham", "Newcastle",
+    ];
 
-    // Fetch weather data
+    ukTowns.forEach(town => fetchWeather(town));
 
     async function fetchWeather(town) {
         try {
@@ -40,10 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
             console.error("Error fetching weather:", error);
             alert(`Error: ${error.message}`);
-         }
+        }
     }
 
-    // display fetched weather data
     function displayWeather(data) {
         const { name, main, weather } = data;
 
@@ -52,49 +46,41 @@ document.addEventListener("DOMContentLoaded", function () {
         card.innerHTML = `
             <h2>${name}</h2>
             <p>${main.temp}°C</p>
-            <p>${weather[0].description}</p>`;
-            
-            carousel.appendChild(card);
+            <p>${weather[0].description}</p>
+        `;
 
-            updateCarousel(); 
+        carousel.appendChild(card);
+        updateCarousel();
     }
 
-   // Search button click
-   searchBtn.addEventListener("click", function () {
-    if (townInput.value) fetchWeather(townInput.value);
-});
-
-   // Load default town
-   fetchWeather("Witham");
-
-
-   function updateCarousel() {
-    const cards = carousel.querySelectorAll(".card");
-    const numberOfCards = cards.length;
-    const angleIncrement = 360 / numberOfCards;
-
-    cards.forEach((card, i) => {
-        const angleDeg = i * angleIncrement;
-        card.style.transform = `rotateY(${angleDeg}deg) translateZ(300px)`;
+    searchBtn.addEventListener("click", function () {
+        if (townInput.value) fetchWeather(townInput.value);
     });
 
-    // Rotate the carousel itself
-    carousel.style.transform = `rotateY(${-currentIndex * angleIncrement}deg)`;
-}
-   
-  // previous and next button
+    fetchWeather("Witham");
 
-  prevBtn.addEventListener("click", () => {
-    const cards = carousel.querySelectorAll(".card");
-    currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-    updateCarousel();
-});
+    function updateCarousel() {
+        const cards = carousel.querySelectorAll(".card");
+        const numberOfCards = cards.length;
+        const angleIncrement = 360 / numberOfCards;
 
-nextBtn.addEventListener("click", () => {
-    const cards = carousel.querySelectorAll(".card");
-    currentIndex = (currentIndex + 1) % cards.length;
-    updateCarousel();
-});
-    
+        cards.forEach((card, i) => {
+            const angleDeg = i * angleIncrement;
+            card.style.transform = `rotateY(${angleDeg}deg) translateZ(300px)`;
+        });
 
+        carousel.style.transform = `rotateY(${-currentIndex * angleIncrement}deg)`;
+    }
+
+    prevBtn.addEventListener("click", () => {
+        const cards = carousel.querySelectorAll(".card");
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        updateCarousel();
+    });
+
+    nextBtn.addEventListener("click", () => {
+        const cards = carousel.querySelectorAll(".card");
+        currentIndex = (currentIndex + 1) % cards.length;
+        updateCarousel();
+    });
 });
