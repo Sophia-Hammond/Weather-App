@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentIndex = 0;
 
     //API 
-    const API_KEY = "the api key"; // https://home.openweathermap.org/api_keys
+    const API_KEY = "7b4a13ac9e2a79595d77b0b3f3199067"; // https://home.openweathermap.org/api_keys
     const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
     const dayVideo = "videos/daySky.mp4";
