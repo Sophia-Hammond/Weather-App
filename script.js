@@ -9,21 +9,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let currentIndex = 0;
 
-    const API_KEY = "7b4a13ac9e2a79595d77b0b3f3199067";
+    //API 
+    const API_KEY = "the api key"; // https://home.openweathermap.org/api_keys
     const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
     const dayVideo = "videos/daySky.mp4";
-    const nightVideo = "videos/nightSky.mp4";
+    const nightVideo = "videos/nightSky.mp4"
+   
+
+    // gets the current hour
     const currentHour = new Date().getHours();
-    videoSource.src = (currentHour >= 7 && currentHour < 19) ? dayVideo : nightVideo;
-    videoElement.load();
 
-    const ukTowns = [
-        "London", "Colchester", "Chelmsford", "Edinburgh", "Bristol",
-        "Cardiff", "Leicester", "Nottingham", "Newcastle",
-    ];
+    // if hour is between 7am & 7pm (dayVideo) otherwise (nightVideo)
+   videoSource.src = (currentHour >= 7 && currentHour < 19) ? dayVideo : nightVideo;
+   videoElement.load();
 
-    ukTowns.forEach(town => fetchWeather(town));
+    // Fetch weather data
 
     async function fetchWeather(town) {
         try {
@@ -62,14 +63,18 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateCarousel() {
         const cards = carousel.querySelectorAll(".card");
         const numberOfCards = cards.length;
-        const angleIncrement = 360 / numberOfCards;
+        const angleIncrement = numberOfCards > 1 ? 360 / numberOfCards : 0;
 
         cards.forEach((card, i) => {
             const angleDeg = i * angleIncrement;
             card.style.transform = `rotateY(${angleDeg}deg) translateZ(300px)`;
         });
-
-        carousel.style.transform = `rotateY(${-currentIndex * angleIncrement}deg)`;
+        
+        if (numberOfCards > 1) {
+            carousel.style.transform = `rotateY(${-currentIndex * angleIncrement}deg)`;
+        } else {
+            carousel.style.transform = "rotateY(0deg)";
+        }
     }
 
     prevBtn.addEventListener("click", () => {
