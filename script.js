@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // List of UK towns to preload in the carousel
 const towns = [
-    "London", "Chelmsford", "Braintree", "Colchester", "Mersea Island", "BrightlingSea", "Witham", "Maldon", "ingatestone", "Great Dunmow"
+    "London", "Chelmsford", "Braintree", "Colchester", "Mersea Island", "BrightlingSea", "Witham", "Maldon", "Great Dunmow"
   ];
   
   // Preload weather cards for each town

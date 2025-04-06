@@ -14,13 +14,21 @@ body {
     justify-content: center;
     height: 100vh;
     overflow: hidden;
+    
+}
+
+ h1 {
+    color: aliceblue;
+    margin-bottom: 50px;
+
+
 }
 
 
 
 /* Search Container */
 .search-container {
-    margin-bottom: 20px;
+    margin-bottom: 200px;
     z-index: 3;
 }
 
@@ -81,10 +89,12 @@ body {
     border: none;
     padding: 10px;
     cursor: pointer;
+    margin-bottom: 1000px;
+
 }
 
-#prevBtn { left: 10px; }
-#nextBtn{ right: 10px; }
+#prevBtn { left: 550px; }
+#nextBtn{ right: 550px; }
 
 /* Animation for auto-rotation */
 @keyframes rotate {
