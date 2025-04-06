@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentIndex = 0;
 
     //API 
-    const API_KEY = "7b4a13ac9e2a79595d77b0b3f3199067"; // https://home.openweathermap.org/api_keys
+    const API_KEY = "7b4a13ac9e2a79595d77b0b3f3199067"; 
     const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
     const dayVideo = "videos/daySky.mp4";
@@ -24,6 +24,19 @@ document.addEventListener("DOMContentLoaded", function () {
    videoSource.src = (currentHour >= 7 && currentHour < 19) ? dayVideo : nightVideo;
    videoElement.load();
 
+    // List of UK towns to preload in the carousel
+const towns = [
+    "London", "Chelmsford", "Braintree", "Colchester", "Mersea Island", "BrightlingSea", "Witham", "Maldon", "ingatestone", "Great Dunmow"
+  ];
+  
+  // Preload weather cards for each town
+  (async function preloadTowns() {
+    for (const town of towns) {
+      await fetchWeather(town);
+      await new Promise(resolve => setTimeout(resolve, 500)); // delay to avoid API spam
+    }
+  })();
+  
     // Fetch weather data
 
     async function fetchWeather(town) {
