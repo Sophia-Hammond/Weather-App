@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const carousel = document.getElementById("carousel");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
+    const carousel2 = document.getElementById("carousel2");
+    const prevBtn2 = document.getElementById("prevBtn2");
+    const nextBtn2 = document.getElementById("nextBtn2");
 
     let currentIndex = 0;
 
@@ -26,7 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // List of UK towns to preload in the carousel
 const towns = [
-    "London", "Chelmsford", "Braintree", "Colchester", "Mersea Island", "BrightlingSea", "Witham", "Maldon", "Great Dunmow"
+    "London", "Chelmsford", "Braintree", "Colchester",
+     "Mersea Island", "BrightlingSea", "Witham", "Maldon", "Great Dunmow"
   ];
   
   // Preload weather cards for each town
@@ -103,3 +107,67 @@ const towns = [
         updateCarousel();
     });
 });
+
+
+// carousel 2 //
+
+const towns2 = [
+    "Oxford", "Cambridge", "Brighton", "York", "Bath",
+    "Newcastle", "Nottingham", "Norwich", "Aberdeen", "Inverness"
+  ];
+  
+
+function updateCarousel2() {
+    const cards = carousel2.querySelectorAll(".card");
+    const numberOfCards = cards.length;
+    const angleIncrement = 360 / numberOfCards;
+    function displayWeather2(data, town) {
+        const card = document.createElement("div");
+        card.className = "card2";
+      
+        const date = new Date(data.dt * 1000);
+        const dateStr = date.toLocaleDateString();
+      
+        const content = `
+          <h3>${town}</h3>
+          <p>${dateStr}</p>
+          <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="${data.weather[0].description}">
+          <p>${data.weather[0].description}</p>
+          <p>🌡️ ${data.main.temp}°C</p>
+          <p>💧 ${data.main.humidity}%</p>
+          <p>💨 ${data.wind.speed} m/s</p>
+        `;
+      
+        card.innerHTML = content;
+        carousel2.appendChild(card);
+      }
+      
+    cards.forEach((card, i) => {
+        const angleDeg = i * angleIncrement;
+        card.style.transform = `rotateY(${angleDeg}deg) translateZ(300px)`;
+    });
+
+    carousel2.style.transform = `rotateY(${-currentIndex2 * angleIncrement}deg)`;
+}
+
+prevBtn2.addEventListener("click", () => {
+    const cards = carousel2.querySelectorAll(".card");
+    currentIndex2 = (currentIndex2 - 1 + cards.length) % cards.length;
+    updateCarousel2();
+});
+
+nextBtn2.addEventListener("click", () => {
+    const cards = carousel2.querySelectorAll(".card");
+    currentIndex2 = (currentIndex2 + 1) % cards.length;
+    updateCarousel2();
+});
+
+
+
+
+
+
+
+
+
+
