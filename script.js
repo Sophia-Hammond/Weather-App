@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "London", "Chelmsford", "Braintree", "Colchester",
      "Mersea Island", "BrightlingSea", "Witham", "Maldon", "Great Dunmow"
   ];
-  
+  //
   // Preload weather cards for each town
   (async function preloadTowns() {
     for (const town of towns) {
